@@ -1,4 +1,4 @@
-class Employed:
+class Employee:
     def __init__(self, name, emp_type, pay_method, CPF, RG, adress, pis, agency, account, bank):
         self.__name = name
         self.__employed_type = emp_type
