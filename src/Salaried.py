@@ -1,6 +1,6 @@
 from src import Employee
 
-class Hourly(Employee):
+class Salaried(Employee):
     def __init__(self, name, CPF, RG, wage):
         super().__init(name, CPF, RG)
         self.__wage = wage
