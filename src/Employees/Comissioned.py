@@ -1,8 +1,8 @@
-from src import Employee
+from src.Employees import Employee
 
 class Comissioned(Employee):
-    def __init__(self, name, CPF, RG, wage, comission):
-        super.__init__(name, CPF, RG)
+    def __init__(self, name, CPF, RG, wage, comission, sindMember):
+        super.__init__(name, CPF, RG, sindMember)
         self.__wage = wage
         self.__comission = comission
 

@@ -1,10 +1,11 @@
-from src.PayMethods import PayMethod
+from src.PayMethods import CheckOnHands
 
-class DeliveryCheck(PayMethod):
+class DeliveryCheck(CheckOnHands):
     def __init__(self, value, date, adress, bankID, companyAgency, companyAccount, checkNum):
-        super.__init__(value, date)
+        super.__init__(value, date, bankID, companyAgency, companyAccount, checkNum)
         self.__adress: adress
-        self.__bankID: bankID
-        self.__companyAgency: companyAgency
-        self.__companyAccount: companyAccount
-        self.__checkNum: checkNum
+    
+    def get_adress(self):
+        return self.__adress
+    def set_adress(self, new_adress):
+        self.__adress = new_adress
