@@ -1,3 +1,5 @@
-from src.Employees import Employee
+from src import Employee
 
-emp = Employee(name="João Levi", CPF="08666271469", RG="35913738", sindMember=True)
+emp = Employee("João", "10231023", "2130120301", False)
+
+print(emp)
