@@ -21,6 +21,3 @@ class Employee:
 
     def __repr__(self):
         return "%s\n%s\n%s\n" %(self.__name, self.__cpf, self.__rg)
-
-emp = Employee("João Levi", "08666271469", "35913738", True)
-print(emp)

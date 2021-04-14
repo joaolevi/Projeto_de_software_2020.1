@@ -1,8 +1,8 @@
-from src.Tax import Tax
+from Tax import Tax
 
 class ServiceTax(Tax):
     def __init__(self, value, service_name):
-        super.__init__(value)
+        super().__init__(value)
         self.__service_name = service_name
     
     def get_service_name(self):

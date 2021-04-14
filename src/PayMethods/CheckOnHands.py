@@ -1,8 +1,8 @@
-from src.PayMethods import PayMethod
+from PayMethod import PayMethod
 
 class CheckOnHands(PayMethod):
     def __init__(self, value, date, companyBankID, companyAgency, companyAccount, checkNum):
-        super.__init__(value, date)
+        super().__init__(value, date)
         self.__companyBankID: companyBankID
         self.__companyAgency: companyAgency
         self.__companyAccount: companyAccount
