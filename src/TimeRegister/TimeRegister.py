@@ -1,0 +1,14 @@
+class TimeRegister:
+    def __init__(self, date, hours):
+        self.__date = date
+        self.__hours = hours
+
+    def get_date(self):
+        return self.__date
+    def set_date(self, new_date):
+        self.__date = new_date
+    
+    def get_hours(self):
+        return self.__hours
+    def set_hours(self, new_hours):
+        self.__hours = new_hours

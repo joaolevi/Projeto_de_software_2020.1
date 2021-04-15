@@ -1,30 +1,18 @@
+import os, sys
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+from BankDatas.BankData import BankData
 from PayMethod import PayMethod
 
-class CheckOnHands(PayMethod):
+class CheckOnHands(PayMethod, BankData):
     def __init__(self, value, date, companyBankID, companyAgency, companyAccount, checkNum):
-        super().__init__(value, date)
-        self.__companyBankID: companyBankID
-        self.__companyAgency: companyAgency
-        self.__companyAccount: companyAccount
+        PayMethod.__init__(self, value, date)
+        BankData.__init__(self, companyBankID, companyAgency, companyAccount)
         self.__checkNum: checkNum
-    
-    def get_companyBankID(self):
-        return self.__companyAccount
-    def set_companyBankID(self, new_bankID):
-        self.__companyBankID = new_bankID
-    
-    def get_companyAgency(self):
-        return self.__companyAgency
-    def set_companyAgency(self, new_companyAgency):
-        self.__companyAgency = new_companyAgency
-    
-    def get_companyAccount(self):
-        return self.__companyAccount
-    def set_companyAccount(self, new_companyAccount):
-        self.__companyAccount = new_companyAccount
     
     def get_checkNum(self):
         return self.__checkNum
     def set_checkNum(self, new_checkNum):
         self.__checkNum = new_checkNum
-    
