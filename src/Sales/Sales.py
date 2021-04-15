@@ -1,9 +1,9 @@
 class Sales:
-    def __init__(self, date, value, seller, comission):
+    def __init__(self, date, value, seller):
         self.__date = date
         self.__value = value
         self.__seller = seller
-        self.__comission = comission
+        self.__comission = value*10/100
     
     def get_date(self):
         return self.__date

@@ -16,6 +16,7 @@ class Company(BankData):
         self.employeesList = []
         self.company_name = company_name
         self.employeesTimeRegister = []
+        self.sales= []
 
     def get_employeesList(self):
         return self.employeesList
@@ -57,21 +58,38 @@ class Company(BankData):
         emp.add_workHours(t)
         self.employeesTimeRegister.append({"Employee": emp, "Date": date, "WorkHours": workHours})
 
-    def set_sales(self, )
+    def set_sale_to_employee(self, emp_id, date, value):
+        i = self.get_employee(emp_id)
+        emp = self.employeesList[i]
+        s = Sales(date=date, value=value, seller=emp)
+        try:
+            emp.add_comission(s.get_comission())
+            self.sales.append(s)
+        except AttributeError:
+            print("ERRO: Empregado não é do tipo Comissionado")
 
 
+### Teste de empregados
 parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
 parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", id="123", adress="R. Alameda Slim", 
-                            sindMember=False, emp_type="Salaried", wage=23054.4)
+                            sindMember=False, emp_type="Comissioned", wage=23054.4)
 parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", id="12345", adress="R. Hotel Jatiuca",
                             sindMember=True, emp_type="Hourly")
-# print(parqueShopping.get_employeesList())
-parqueShopping.timeRegister(3321, "01-10-2021", 8)
-parqueShopping.timeRegister(3321, "01-12-2021", 10)
-parqueShopping.timeRegister(3321, "01-13-2021", 9)
-parqueShopping.timeRegister(3321, "01-14-2021", 8)
 
-e = parqueShopping.get_employee(3321)
-print(parqueShopping.employeesList[e].workHours)
-print(parqueShopping.employeesTimeRegister)
+### Teste de registro de ponto                          
+# print(parqueShopping.get_employeesList())
+# parqueShopping.timeRegister(3321, "01-10-2021", 8)
+# parqueShopping.timeRegister(3321, "01-12-2021", 10)
+# parqueShopping.timeRegister(3321, "01-13-2021", 9)
+# parqueShopping.timeRegister(3321, "01-14-2021", 8)
+# e = parqueShopping.get_employee(3321)
+# print(parqueShopping.employeesList[e].workHours)
+# print(parqueShopping.employeesTimeRegister)
+
+### Teste de comissão
+# parqueShopping.set_sale_to_employee(969651, "10-2-2021", 350.56)
+# parqueShopping.set_sale_to_employee(969651, "10-2-2021", 231.22)
+# parqueShopping.set_sale_to_employee(969651, "10-2-2021", 111)
+# outro = parqueShopping.get_employee(969651)
+# print(parqueShopping.employeesList[outro].get_comission())
 

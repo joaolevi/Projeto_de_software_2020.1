@@ -13,5 +13,10 @@ class Comissioned(Employee):
 
     def get_comission(self):
         return self.__comission
-    def set_comission(self, comission):
-        self.__comission = comission
+    
+    def add_comission(self, comission):
+        self.__comission += comission
+
+    def clear_comission(self):
+        self.__comission = 0
+    
