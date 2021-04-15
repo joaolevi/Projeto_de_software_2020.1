@@ -1,7 +1,13 @@
 class TimeRegister:
-    def __init__(self, date, hours):
+    def __init__(self, name, date, hours):
+        self.__name = name
         self.__date = date
         self.__hours = hours
+
+    def get_name(self):
+        return self.__name
+    def set_name(self, new_name):
+        self.__name = new_name
 
     def get_date(self):
         return self.__date

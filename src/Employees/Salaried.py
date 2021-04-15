@@ -1,8 +1,8 @@
-from Employee import Employee
+from Employees.Employee import Employee
 
 class Salaried(Employee):
-    def __init__(self, name, CPF, RG, wage, sindMember):
-        super().__init__(name, CPF, RG, sindMember)
+    def __init__(self, name, adress,sindMember, wage):
+        super().__init__(name, adress, sindMember)
         self.__wage = wage
 
     def get_wage(self):

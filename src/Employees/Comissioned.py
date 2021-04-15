@@ -1,8 +1,8 @@
-from Employee import Employee
+from Employees.Employee import Employee
 
 class Comissioned(Employee):
-    def __init__(self, name, CPF, RG, wage, comission, sindMember):
-        super().__init__(name, CPF, RG, sindMember)
+    def __init__(self, name, adress, sindMember, wage, comission, ):
+        super().__init__(name, adress, sindMember)
         self.__wage = wage
         self.__comission = comission
 
@@ -15,6 +15,3 @@ class Comissioned(Employee):
         return self.__comission
     def set_comission(self, comission):
         self.__comission = comission
-
-c = Comissioned("João", "10231023", "2130120301", 3212.1, 0, False)
-print(c)

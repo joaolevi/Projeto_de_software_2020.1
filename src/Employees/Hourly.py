@@ -1,8 +1,8 @@
-from Employee import Employee
+from Employees.Employee import Employee
 
 class Hourly(Employee):
-    def __init__(self, name, CPF, RG, sindMember, workHours):
-        super().__init__(name, CPF, RG, sindMember)
+    def __init__(self, name, adress, sindMember, workHours):
+        super().__init__(name, adress, sindMember)
         self.__workHours = workHours
 
     def get_workHours(self):
@@ -10,5 +10,3 @@ class Hourly(Employee):
     def set_workHours(self, hours):
         self.__workHours += hours
     
-e = Hourly("João Levi", "00231023", "19231293", False, 23034)
-print(e)
