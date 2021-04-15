@@ -92,4 +92,5 @@ parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", id="12345", ad
 # parqueShopping.set_sale_to_employee(969651, "10-2-2021", 111)
 # outro = parqueShopping.get_employee(969651)
 # print(parqueShopping.employeesList[outro].get_comission())
+# print(parqueShopping.sales)
 
