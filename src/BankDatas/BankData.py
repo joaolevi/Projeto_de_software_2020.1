@@ -18,3 +18,6 @@ class BankData:
         return self.__account
     def set_account(self, new_account):
         self.__account = new_account
+
+# bank = BankData("001", "123210", "1922")
+# print(bank)

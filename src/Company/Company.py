@@ -1,6 +1,6 @@
 class Company:
-    def __init__(self, Employees, name, bankID, agency, account):
-        self.__employeesList = [Employees]
+    def __init__(self, name, bankID, agency, account):
+        self.__employeesList = []
         self.__name = name
         self.__bankID = bankID
         self.__agency = agency
