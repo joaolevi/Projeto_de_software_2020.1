@@ -12,3 +12,6 @@ class TimeRegister:
         return self.__hours
     def set_hours(self, new_hours):
         self.__hours = new_hours
+    
+    def __repr__(self):
+        return "%s -- %s\n" %(self.__date, self.__hours)

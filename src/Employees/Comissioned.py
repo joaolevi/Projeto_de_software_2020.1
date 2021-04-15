@@ -1,10 +1,10 @@
 from Employees.Employee import Employee
 
 class Comissioned(Employee):
-    def __init__(self, name, rg, id, adress, sindMember, wage, comission, ):
+    def __init__(self, name, rg, id, adress, sindMember, wage):
         super().__init__(name, rg, id, adress, sindMember)
         self.__wage = wage
-        self.__comission = comission
+        self.__comission = 0
 
     def get_wage(self):
         return self.__wage

@@ -5,7 +5,7 @@ class Employee:
         self.__adress = adress
         self.__sindMember = sindMember
         self.id = id
-        self.timeRegister = []
+        self.workHours = []
 
     def get_name(self): return self.__name
     def set_name(self, name): self.__name = name
@@ -23,14 +23,14 @@ class Employee:
     def set_sindMember(self):
         self.__sindMember = not(self.__sindMember)
         
-    def get_timeRegister(self):
-        return self.timeRegister
+    def get_workHours(self):
+        return self.workHours
     
-    def add_timeRegister(self, timeReg):
-        self.timeRegister.append(timeReg)
+    def add_workHours(self, timeReg):
+        self.workHours.append(timeReg)
     
-    def clear_timeRegister(self):
-        self.timeRegister = None
+    def clear_workHours(self):
+        self.workHours = None
 
     def __repr__(self):
         return "%s\n" %(self.name)
