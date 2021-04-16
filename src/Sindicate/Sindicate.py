@@ -13,6 +13,10 @@ class Sindicate:
     def set_serviceTax(self, new_serviceTax, value):
         self.__serviceTax[new_serviceTax] = value
 
+    def id_generetor(self, emp):
+        new_id = int(emp.rg[:-4])*17
+        emp.sind_id = new_id
+
     def month_tax_roll(self, members):
         for m in members:
             if m.sindMember:
