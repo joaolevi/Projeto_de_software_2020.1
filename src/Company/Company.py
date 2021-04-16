@@ -10,9 +10,9 @@ from Sindicate.Sindicate import Sindicate
 from TimeRegister.TimeRegister import TimeRegister
 from Sales.Sales import Sales
 from BankDatas.BankData import BankData
-from PayMethods.DeliveryCheck import DeliveryCheck
-from PayMethods.CheckOnHands import CheckOnHands
 from PayMethods.AccountCredit import AccountCredit
+from PayMethods.CheckOnHands import CheckOnHands
+from PayMethods.DeliveryCheck import DeliveryCheck
 
 class Company(BankData):
     def __init__(self, company_name, bankID, agency, account):
@@ -40,7 +40,7 @@ class Company(BankData):
             else:
                 x+=1
 
-    def add_employee(self, name, rg, id, adress, sindMember, emp_type, payMethod, wage=None, bankAcc=None):
+    def add_employee(self, name, rg, adress, sindMember, emp_type, payMethod, wage=None, bankAcc=None):
         new_id = int(rg[:-3])*27
         if emp_type == "Comissioned":
             emp = Comissioned(name=name, rg=rg, id=new_id, adress=adress, 
@@ -51,14 +51,16 @@ class Company(BankData):
         elif emp_type == "Hourly":
             emp = Hourly(name=name, rg=rg, id=new_id, adress=adress, sindMember=sindMember,
                          paymentMethod = payMethod)
-        if payMethod == "AccountCredit" & bankAcc:
-            acc = BankData(bankID=bankAcc['bankID'], agency=bankAcc['agency'], account=bankAcc['account'])
-            emp.set_bankAcc(acc)
+        if payMethod == "AccountCredit":
+            if bankAcc:
+                acc = BankData(bankID=bankAcc['bankID'], agency=bankAcc['agency'], account=bankAcc['account'])
+                emp.set_bankAcc(acc)
         self.employeesList.append(emp)
 
     def remove_employee(self, emp_id):
         i = self.get_employee(emp_id)
-        self.employeesList.remove(i)
+        emp = self.employeesList[i]
+        self.employeesList.remove(emp)
 
     def timeRegister(self, emp_id, date, workHours):
         t = TimeRegister(date, workHours)
@@ -77,20 +79,46 @@ class Company(BankData):
         except AttributeError:
             print("ERRO: Empregado não é do tipo Comissionado")
 
-    # def change_employee_details(self, emp_id, nome=None, rg=None, adress=None, )
-
+    def change_employee_details(self, emp_id, emp_t=None, name=None, rg=None, adress=None, bankAcc=None, payMethod=None, wage=None):
+        i = self.get_employee(emp_id)
+        emp = self.employeesList[i]
+        if emp_t:
+            self.add_employee(name=emp.name, rg=emp.rg, adress=emp.adress, sindMember=emp.sindMember, emp_type=emp_t, wage=wage, bankAcc=bankAcc, payMethod=payMethod)
+            self.remove_employee(emp.id)
+        if name:
+            self.employeesList[i].set_name(name)
+        if rg:
+            self.employeesList[i].set_rg(rg)
+        if adress:
+            self.employeesList[i].set_adress(adress)
+        if bankAcc:
+            self.employeesList[i].set_bankAcc(bankAcc)
+        if payMethod:
+            self.employeesList[i].set_paymentMethod(payMethod)
+        # if wage and (isinstance(emp, Comissioned) or isinstance(emp, Salaried)):
+        #     self.employeesList[i].set_wage(wage)
 
 ### Teste de empregados
 parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
-parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", id="123", adress="R. Alameda Slim", 
+parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
                             sindMember=False, emp_type="Comissioned", payMethod="AccountCredit", 
                             bankAcc={'bankID':"001", 'agency':"41730-0", 'account':'37501-0'}, wage=23054.4)
-parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", id="12345", adress="R. Hotel Jatiuca",
-                            sindMember=True, payMethod='CheckOnHands',emp_type="Hourly")
+parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
+                            sindMember=True, payMethod='CheckOnHands',emp_type="Salaried")
 
-i = parqueShopping.get_employee(3321)
-emp = parqueShopping.employeesList[i]
-print(emp.get_payMethod())
+### Teste função de alterar
+# i = parqueShopping.get_employee(969651)
+# emp = parqueShopping.employeesList[i]
+
+# parqueShopping.change_employee_details(969651, emp_t="Salaried")
+# parqueShopping.change_employee_details(969651, name="Levizinho", adress="Helena Costa", rg="11111")
+
+# h = parqueShopping.get_employee(969651)
+# emp2 = parqueShopping.employeesList[h]
+# print(emp2)
+# print(emp.get_wage())
+# print(emp2.get_adress(), emp2.get_rg())
+
 
 ### Teste de registro de ponto                          
 # print(parqueShopping.get_employeesList())

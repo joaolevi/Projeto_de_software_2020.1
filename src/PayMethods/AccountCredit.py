@@ -3,8 +3,8 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
+from PayMethods.PayMethod import PayMethod
 from BankDatas.BankData import BankData
-from PayMethod import PayMethod
 
 class AccountCredit(PayMethod, BankData):
     def __init__(self, value, date, bankID, accountNum, agencyNum):

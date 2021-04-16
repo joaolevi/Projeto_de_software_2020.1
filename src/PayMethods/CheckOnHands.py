@@ -3,16 +3,20 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
+from PayMethods.PayMethod import PayMethod
 from BankDatas.BankData import BankData
-from PayMethod import PayMethod
 
-class CheckOnHands(PayMethod, BankData):
-    def __init__(self, value, date, companyBankID, companyAgency, companyAccount, checkNum):
+class CheckOnHands(BankData, PayMethod):
+    def __init__(self, value, date, bankID, agency, account):
         PayMethod.__init__(self, value, date)
-        BankData.__init__(self, companyBankID, companyAgency, companyAccount)
-        self.__checkNum: checkNum
-    
+        BankData.__init__(self, bankID, agency, account)
+        self.__checkNum: None
+
     def get_checkNum(self):
         return self.__checkNum
     def set_checkNum(self, new_checkNum):
         self.__checkNum = new_checkNum
+
+# d = CheckOnHands(123, "10-1-2021", "001", "2030-1", "129239-1")
+# print(d.set_checkNum("123123"))
+# print(d.get_checkNum())

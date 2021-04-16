@@ -1,23 +1,26 @@
 class BankData:
     def __init__(self, bankID, agency, account):
-        self.__bankID = bankID
-        self.__agency = agency
-        self.__account = account
+        self.bankID = bankID
+        self.agency = agency
+        self.account = account
     
     def get_bankID(self):
-        return self.__bankID
+        return self.bankID
     def set_bankID(self, new_bankID):
-        self.__bankID = new_bankID
+        self.bankID = new_bankID
     
     def get_agency(self):
-        return self.__agency
+        return self.agency
     def set_agency(self, new_agency):
-        self.__agency = new_agency
+        self.agency = new_agency
     
     def get_account(self):
-        return self.__account
+        return self.account
     def set_account(self, new_account):
-        self.__account = new_account
+        self.account = new_account
+
+    def __repr__(self):
+        return "bankID: %s, agency: %s, account: %s\n" %(self.bankID, self.agency, self.account)
 
 # bank = BankData("001", "123210", "1922")
 # print(bank)

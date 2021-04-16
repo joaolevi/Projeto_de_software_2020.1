@@ -1,23 +1,27 @@
 class Employee:
-    def __init__(self, name, rg, id, adress, sindMember):
+    def __init__(self, name, rg, id, adress, sindMember, paymentMethod):
         self.name = name
-        self.__rg = rg
-        self.__adress = adress
+        self.rg = rg
+        self.adress = adress
         self.sindMember = sindMember
         self.id = id
+        self.sind_id = None
+        self.bankAcc = None
+        self.paymentMethod = paymentMethod
         self.tax_value = 0
         self.workHours = []
 
-    def get_name(self): return self.__name
-    def set_name(self, name): self.__name = name
+    def get_name(self): return self.name
+    def set_name(self, name):
+        self.name = name
 
-    def get_adress(self): return self.__adress
-    def set_adress(self, new_adress): self.__adress = new_adress
+    def get_adress(self): return self.adress
+    def set_adress(self, new_adress): self.adress = new_adress
 
     def get_rg(self):
-        return self.__rg
+        return self.rg
     def set_rg(self, new_rg):
-        self.__rg = new_rg
+        self.rg = new_rg
 
     def get_sindMember(self):
         return self.sindMember
@@ -33,5 +37,15 @@ class Employee:
     def clear_workHours(self):
         self.workHours = None
 
+    def get_paymentMethod(self):
+        return self.paymentMethod
+    def set_paymentMethod(self, new_payMethod):
+        self.paymentMethod = new_payMethod
+    
+    def get_bankAcc(self):
+        return self.bankAcc
+    def set_bankAcc(self, new_bankAcc):
+        self.bankAcc = new_bankAcc
+
     def __repr__(self):
-        return "%s\n" %(self.name)
+        return "%s\n, %i" %(self.name, self.id)
