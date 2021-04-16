@@ -6,6 +6,7 @@ sys.path.append(parentdir)
 from Employees.Hourly import Hourly
 from Employees.Comissioned import Comissioned
 from Employees.Salaried import Salaried
+from Sindicate.Sindicate import Sindicate
 from TimeRegister.TimeRegister import TimeRegister
 from Sales.Sales import Sales
 from BankDatas.BankData import BankData
@@ -93,4 +94,14 @@ parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", id="12345", ad
 # outro = parqueShopping.get_employee(969651)
 # print(parqueShopping.employeesList[outro].get_comission())
 # print(parqueShopping.sales)
+
+### Teste do sindicato
+# s = Sindicate(25.31)
+# i = parqueShopping.get_employee(3321)
+# emp = parqueShopping.employeesList[i]
+# print(parqueShopping.employeesList[i].tax_value)
+# s.month_tax_roll(parqueShopping.employeesList)
+# print(parqueShopping.employeesList[i].tax_value)
+# s.tax_associator(emp, 'Medical')
+# print(parqueShopping.employeesList[i].tax_value)
 

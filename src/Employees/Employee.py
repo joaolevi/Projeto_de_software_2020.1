@@ -3,8 +3,9 @@ class Employee:
         self.name = name
         self.__rg = rg
         self.__adress = adress
-        self.__sindMember = sindMember
+        self.sindMember = sindMember
         self.id = id
+        self.tax_value = 0
         self.workHours = []
 
     def get_name(self): return self.__name
@@ -19,9 +20,9 @@ class Employee:
         self.__rg = new_rg
 
     def get_sindMember(self):
-        return self.__sindMember
+        return self.sindMember
     def set_sindMember(self):
-        self.__sindMember = not(self.__sindMember)
+        self.sindMember = not(self.sindMember)
         
     def get_workHours(self):
         return self.workHours
