@@ -79,12 +79,19 @@ class Company(BankData):
         except AttributeError:
             print("ERRO: Empregado não é do tipo Comissionado")
 
-    def change_employee_details(self, emp_id, emp_t=None, name=None, rg=None, adress=None, bankAcc=None, payMethod=None, wage=None):
+    def change_employee_type(self, emp_id, emp_type, wage=None):
         i = self.get_employee(emp_id)
         emp = self.employeesList[i]
-        if emp_t:
-            self.add_employee(name=emp.name, rg=emp.rg, adress=emp.adress, sindMember=emp.sindMember, emp_type=emp_t, wage=wage, bankAcc=bankAcc, payMethod=payMethod)
+        if emp_type:
             self.remove_employee(emp.id)
+            self.add_employee(name=emp.name, rg=emp.rg, adress=emp.adress, sindMember=emp.sindMember, emp_type=emp_type, wage=wage, payMethod=emp.payMethod)
+            index = self.get_employee(emp.id)
+            return index
+
+    def change_employee_details(self, emp_id, emp_t=None, name=None, rg=None, adress=None, bankAcc=None, payMethod=None, wage=None):
+        i = self.get_employee(emp_id)
+        if emp_t:
+            i = self.change_employee_type(emp_id, emp_t, wage)
         if name:
             self.employeesList[i].set_name(name)
         if rg:
@@ -95,8 +102,8 @@ class Company(BankData):
             self.employeesList[i].set_bankAcc(bankAcc)
         if payMethod:
             self.employeesList[i].set_paymentMethod(payMethod)
-        # if wage and (isinstance(emp, Comissioned) or isinstance(emp, Salaried)):
-        #     self.employeesList[i].set_wage(wage)
+        if wage and (isinstance(self.employeesList[i], Comissioned) or isinstance(self.employeesList[i], Salaried)):
+            self.employeesList[i].set_wage(wage)
 
 ### Teste de empregados
 parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
@@ -106,7 +113,7 @@ parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adre
 parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
                             sindMember=True, payMethod='CheckOnHands',emp_type="Salaried")
 
-### Teste função de alterar
+# Teste função de alterar
 # i = parqueShopping.get_employee(969651)
 # emp = parqueShopping.employeesList[i]
 
