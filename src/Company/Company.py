@@ -21,6 +21,7 @@ class Company(BankData):
         self.company_name = company_name
         self.employeesTimeRegister = []
         self.sales= []
+        self.pay_schedule = ["weekly-1-friday", "weekly-2-friday", "monthly-$"]
 
     def get_employeesList(self):
         return self.employeesList
@@ -40,16 +41,16 @@ class Company(BankData):
             else:
                 x+=1
 
-    def add_employee(self, name, rg, adress, sindMember, emp_type, payMethod, wage=None, bankAcc=None):
+    def add_employee(self, name, rg, adress, sindMember, emp_type, payMethod, hiring_date, wage=None, bankAcc=None):
         new_id = int(rg[:-3])*27
         if emp_type == "Comissioned":
             emp = Comissioned(name=name, rg=rg, id=new_id, adress=adress, 
-                            paymentMethod = payMethod, sindMember=sindMember, wage=wage)
+                            paymentMethod = payMethod, sindMember=sindMember, hiring_date=hiring_date, wage=wage)
         elif emp_type == "Salaried":
-            emp = Salaried(name=name, rg=rg, id=new_id, adress=adress, sindMember=sindMember, 
+            emp = Salaried(name=name, rg=rg, id=new_id, adress=adress, hiring_date=hiring_date, sindMember=sindMember, 
                             paymentMethod = payMethod, wage=wage)
         elif emp_type == "Hourly":
-            emp = Hourly(name=name, rg=rg, id=new_id, adress=adress, sindMember=sindMember,
+            emp = Hourly(name=name, rg=rg, id=new_id, adress=adress, hiring_date=hiring_date, sindMember=sindMember,
                          paymentMethod = payMethod)
         if payMethod == "AccountCredit":
             if bankAcc:
@@ -84,7 +85,7 @@ class Company(BankData):
         emp = self.employeesList[i]
         if emp_type:
             self.remove_employee(emp.id)
-            self.add_employee(name=emp.name, rg=emp.rg, adress=emp.adress, sindMember=emp.sindMember, emp_type=emp_type, wage=wage, payMethod=emp.payMethod)
+            self.add_employee(name=emp.name, rg=emp.rg, adress=emp.adress, sindMember=emp.sindMember, emp_type=emp_type, wage=wage, payMethod=emp.paymentMethod, hiring_date=emp.hiring_date)
             index = self.get_employee(emp.id)
             return index
 
@@ -105,26 +106,56 @@ class Company(BankData):
         if wage and (isinstance(self.employeesList[i], Comissioned) or isinstance(self.employeesList[i], Salaried)):
             self.employeesList[i].set_wage(wage)
 
+    def set_employee_pay_date(self, emp_id):
+        i = self.get_employee(emp_id)
+        count = 1
+        for option in self.pay_schedule:
+            print(count,"-", option)
+            count += 1
+        choose = int(input("Escolha uma data para o pagamento: "))
+        self.employeesList[i].set_payDate(self.pay_schedule[choose-1])
+    
+    def set_new_pay_schedule(self, schedule):
+        if isinstance(schedule, list):
+            self.pay_schedule = schedule
+
+    ### It needs more dev 
+    # def pay_employees(self, today_date):
+    #     for emp in self.employeesList:
+    #         if emp.last_pay_date:
+    #             payMet = emp.paymentMethod.split("-")
+
+            
+
+        
+
+
 ### Teste de empregados
 parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
 parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
-                            sindMember=False, emp_type="Comissioned", payMethod="AccountCredit", 
+                            sindMember=False, emp_type="Comissioned", payMethod="AccountCredit", hiring_date="2020-1-10", 
                             bankAcc={'bankID':"001", 'agency':"41730-0", 'account':'37501-0'}, wage=23054.4)
+
 parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
-                            sindMember=True, payMethod='CheckOnHands',emp_type="Salaried")
+                            sindMember=True, payMethod='CheckOnHands',emp_type="Salaried", hiring_date="2021-01-22")
 
-# Teste função de alterar
-# i = parqueShopping.get_employee(969651)
-# emp = parqueShopping.employeesList[i]
+### Teste função de alterar
+i = parqueShopping.get_employee(969651)
+emp = parqueShopping.employeesList[i]
+print(emp.hiring_date)
+parqueShopping.change_employee_details(969651, emp_t="Salaried", name="Levizinho", adress="Helena Costa", rg="11111")
 
-# parqueShopping.change_employee_details(969651, emp_t="Salaried")
-# parqueShopping.change_employee_details(969651, name="Levizinho", adress="Helena Costa", rg="11111")
-
+### Teste função de data de pagamento
+#  
 # h = parqueShopping.get_employee(969651)
 # emp2 = parqueShopping.employeesList[h]
-# print(emp2)
-# print(emp.get_wage())
-# print(emp2.get_adress(), emp2.get_rg())
+# print(emp2.get_payDate())
+# new_schedule = ["weekly-2-saturday", "weekly-1-monday", "montlhy-7", "montlhy-18"]
+# print(parqueShopping.pay_schedule)
+# parqueShopping.set_new_pay_schedule(new_schedule)
+# print(parqueShopping.pay_schedule)
+# parqueShopping.set_employee_pay_date(969651)
+# print(emp2.get_payDate())
 
 
 ### Teste de registro de ponto                          

@@ -1,10 +1,11 @@
 from Employees.Employee import Employee
 
 class Comissioned(Employee):
-    def __init__(self, name, rg, id, adress, sindMember, wage, paymentMethod):
-        super().__init__(name, rg, id, adress, sindMember, paymentMethod)
+    def __init__(self, name, rg, id, adress, sindMember, wage, paymentMethod, hiring_date):
+        super().__init__(name, rg, id, adress, sindMember, paymentMethod, hiring_date)
         self.__wage = wage
         self.__comission = 0
+        self.payDate = "weekly-2-friday"
 
     def get_wage(self):
         return self.__wage

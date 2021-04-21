@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self, name, rg, id, adress, sindMember, paymentMethod):
+    def __init__(self, name, rg, id, adress, sindMember, paymentMethod, hiring_date):
         self.name = name
         self.rg = rg
         self.adress = adress
@@ -10,6 +10,9 @@ class Employee:
         self.paymentMethod = paymentMethod
         self.tax_value = 0
         self.workHours = []
+        self.payDate = None
+        self.last_pay_date = None
+        self.hiring_date = hiring_date
 
     def get_name(self): return self.name
     def set_name(self, name):
@@ -46,6 +49,21 @@ class Employee:
         return self.bankAcc
     def set_bankAcc(self, new_bankAcc):
         self.bankAcc = new_bankAcc
+
+    def get_payDate(self):
+        return self.payDate
+    def set_payDate(self, new_payDate):
+        self.payDate = new_payDate
+
+    def get_hiring_date(self):
+        return self.hiring_date
+    def set_hiring_date(self, new_hiring_date):
+        self.hiring_date = new_hiring_date
+
+    def get_last_pay_date(self):
+        return self.last_pay_date
+    def set_last_pay_date(self, new_date):
+        self.last_pay_date = new_date
 
     def __repr__(self):
         return "%s\n, %i" %(self.name, self.id)
