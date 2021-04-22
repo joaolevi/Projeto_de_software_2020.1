@@ -7,6 +7,12 @@ from PayMethods.PayMethod import PayMethod
 from BankDatas.BankData import BankData
 
 class AccountCredit(PayMethod, BankData):
-    def __init__(self, value, date, bankID, accountNum, agencyNum):
+    def __init__(self, value, date, bankID, accountNum, agencyNum, name):
         PayMethod.__init__(self, value, date)
         BankData.__init__(self, bankID, accountNum, agencyNum)
+        self.name
+    
+    def get_name(self):
+        return self.name
+    def set_name(self, new_name):
+        self.name = new_name

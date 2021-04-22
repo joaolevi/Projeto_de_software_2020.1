@@ -1,8 +1,8 @@
 from Employees.Employee import Employee
 
 class Salaried(Employee):
-    def __init__(self, name, rg, id, adress, sindMember, wage, paymentMethod, hiring_date):
-        super().__init__(name, rg, id, adress, sindMember, paymentMethod, hiring_date)
+    def __init__(self, name, rg, id, adress, sindMember, wage, paymentMethod, date):
+        super().__init__(name, rg, id, adress, sindMember, paymentMethod, date)
         self.__wage = wage
         self.payDate = "monthly-$"
 

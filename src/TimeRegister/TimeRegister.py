@@ -1,7 +1,7 @@
 class TimeRegister:
     def __init__(self, date, hours):
-        self.__date = date
-        self.__hours = hours
+        self.date = date
+        self.hours = hours
 
     def get_date(self):
         return self.__date

@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self, name, rg, id, adress, sindMember, paymentMethod, hiring_date):
+    def __init__(self, name, rg, id, adress, sindMember, paymentMethod, date):
         self.name = name
         self.rg = rg
         self.adress = adress
@@ -11,8 +11,7 @@ class Employee:
         self.tax_value = 0
         self.workHours = []
         self.payDate = None
-        self.last_pay_date = None
-        self.hiring_date = hiring_date
+        self.last_pay_date = date
 
     def get_name(self): return self.name
     def set_name(self, name):
@@ -54,11 +53,6 @@ class Employee:
         return self.payDate
     def set_payDate(self, new_payDate):
         self.payDate = new_payDate
-
-    def get_hiring_date(self):
-        return self.hiring_date
-    def set_hiring_date(self, new_hiring_date):
-        self.hiring_date = new_hiring_date
 
     def get_last_pay_date(self):
         return self.last_pay_date
