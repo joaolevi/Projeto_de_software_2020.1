@@ -140,21 +140,31 @@ class Company(BankData):
             self.payment_register.append(CheckOnHands(total_value, today_date, self.bankID, self.agency, self.account, randrange(10000, 100000, 5)))
         elif emp.paymentMethod == "DeliveryCheck":
             self.payment_register.append(DeliveryCheck(total_value, today_date, self.bankID, self.agency, self.account, randrange(10000, 100000, 5), emp.adress))
+        if isinstance(emp, Hourly):
+            self.employeesList[i].workHours = 0
 
     ### It is still in developement
-    # def pay_employees(self, today_date):
-    #     date_format = "%Y/%m/%d"
-    #     for emp in self.employeesList:
-    #         payMet = emp.paymentMethod.split("-")
-    #         if payMet[0] == "weekly":
-    #             for h in emp.workHours:
-    #                 hours += h.hours
-    #             worked_days = datetime.strptime(today_date, date_format)-datetime.strptime(emp.last_pay_date, date_format)
-    #             if worked_days >= (7*int(payMet[1])):
-    #                 if isinstance(emp, Hourly):
-    #                     bonus_hours = hours-(worked_days*8)
-    #                     value = emp.hour_value*(hours + 0.5*bonus_hours)
-    #                 elif isinstance(emp, Comissioned):
+    def pay_employees(self, today_date):
+        date_format = "%Y/%m/%d"
+        for emp in self.employeesList:
+            payMet = emp.paymentMethod.split("-")
+            if payMet[0] == "weekly":
+                for h in emp.workHours:
+                    hours += h.hours
+                worked_days = datetime.strptime(today_date, date_format)-datetime.strptime(emp.last_pay_date, date_format)
+                if worked_days >= (7*int(payMet[1])) and : #Need check if is the same day of the week of the emp.payDay
+                    if isinstance(emp, Hourly):
+                        bonus_hours = hours-(worked_days*8)
+                        value = emp.hour_value*(hours + 0.5*bonus_hours)
+                    elif isinstance(emp, Comissioned):
+                        value = emp.wage/2 + emp.comission
+                    elif isinstance(emp, salaried):
+                        value = emp.wage
+                    self.payday_employee_method(emp.id, value, today_date)
+            elif payMet[0] == "monthly":
+                if isinstance(emp, Hourly):
+
+                
 
 
                         
