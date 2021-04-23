@@ -1,12 +1,14 @@
 from Employees.Employee import Employee
 from Company.Company import Company
 
-emp1 = Employee("João", "10231023", "2130120301", False)
-emp2 = Employee("Levi", "120230", "1299212", True)
 
-parqueShopping = Company("Parque Shopping Maceió", "001", "35102-5", "2302-1")
 
-parqueShopping.add_employee(emp1)
-parqueShopping.add_employee(emp2)
-empList = parqueShopping.get_employees()
-print(empList)
+
+# parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
+# parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
+#                             sindMember=False, emp_type="Comissioned", payMethod="AccountCredit", date='2021-4-10', 
+#                             bankAcc={'bankID':"001", 'agency':"41730-0", 'account':'37501-0'}, wage=23054.4)
+
+# parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
+#                             sindMember=True, payMethod='CheckOnHands',emp_type="Salaried", date='2021-4-1', wage=19882.24)
+
