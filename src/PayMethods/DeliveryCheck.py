@@ -6,8 +6,8 @@ sys.path.append(parentdir)
 from PayMethods.CheckOnHands import CheckOnHands
 
 class DeliveryCheck(CheckOnHands):
-    def __init__(self, value, date, bankID, companyAgency, companyAccount, check_num, adress):
-        super().__init__(value, date, bankID, companyAgency, companyAccount, check_num)
+    def __init__(self, name, value, date, bankID, companyAgency, companyAccount, check_num, adress):
+        super().__init__(name, value, date, bankID, companyAgency, companyAccount, check_num)
         self.adress: None
     
     def get_adress(self):

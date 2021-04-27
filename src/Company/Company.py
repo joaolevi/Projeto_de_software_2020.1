@@ -136,15 +136,15 @@ class Company(BankData):
             total_value = value
         if emp.paymentMethod == "AccountCredit":
             bankID, agency, account = emp.bankAcc.bankID, emp.bankAcc.agency, emp.bankAcc.account
-            self.payment_register.append(AccountCredit(total_value, today_date, bankID, agency, account, name=emp.name))
+            self.payment_register.append(AccountCredit(name=emp.name, value=total_value, date=today_date, bankID=bankID, agencyNum=agency, accountNum=account))
         elif emp.paymentMethod == "CheckOnHands":
-            self.payment_register.append(CheckOnHands(total_value, today_date, self.bankID, self.agency, self.account, randrange(10000, 100000, 5)))
+            c = CheckOnHands(name=emp.name, value=total_value, date=today_date, bankID=self.bankID, agency=self.agency, account=self.account, check_num=randrange(10000, 100000, 5))
+            self.payment_register.append(c)
         elif emp.paymentMethod == "DeliveryCheck":
-            self.payment_register.append(DeliveryCheck(total_value, today_date, self.bankID, self.agency, self.account, randrange(10000, 100000, 5), emp.adress))
+            self.payment_register.append(DeliveryCheck(name=emp.name, value=total_value, date=today_date, bankID=self.bankID, companyAgency=self.agency, companyAccount=self.account, check_num=randrange(10000, 100000, 5), adress=emp.adress))
         if isinstance(emp, Hourly):
             self.employeesList[i].workHours = 0
         self.employeesList[i].set_last_pay_date(today_date)
-        print(self.payment_register)
 
     def pay_employees(self, today_date):
         date_format = "%Y-%m-%d"
@@ -155,20 +155,20 @@ class Company(BankData):
             value = 0
             if payMet[0] == "weekly":
                 hours = emp.workHours
-                if worked_days >= (7*int(payMet[1])) and payMet[2] == datetime.strptime(today_date, date_format).strftime("%A"):
+                if worked_days >= (7*int(payMet[1])) and payMet[2] == str(datetime.strptime(today_date, date_format).strftime("%A")).lower():
                     if isinstance(emp, Hourly):
                         bonus_hours = hours-(worked_days*8)
                         value = emp.hour_value*(hours + 0.5*bonus_hours)
-                if isinstance(emp, Comissioned):
-                    if payMet[1] == 1:
-                        div = 4
-                    else: div = 2
-                    value = emp.wage/div + emp.comission
-                elif isinstance(emp, Salaried):
-                    if payMet[1] == 1:
-                        div = 4
-                    else: div = 2
-                    value = emp.wage/div
+                    if isinstance(emp, Comissioned):
+                        if payMet[1] == 1:
+                            div = 4
+                        else: div = 2
+                        value = emp.wage/div + emp.comission
+                    elif isinstance(emp, Salaried):
+                        if payMet[1] == 1:
+                            div = 4
+                        else: div = 2
+                        value = emp.wage/div
                 self.payday_employee_method(emp_id=emp.id, value=value, today_date=today_date)
             elif payMet[0] == "monthly":
                 if isinstance(emp, Hourly):
@@ -178,16 +178,15 @@ class Company(BankData):
                     value = emp.wage + emp.comission
                 if isinstance(emp, Salaried):
                     value = emp.wage
-                if datetime.strptime(today_date, date_format).strftime("%d") == payMet[1]:
+                if str(datetime.strptime(today_date, date_format).strftime("%d")).lower() == payMet[1]:
                     self.payday_employee_method(emp.id, value, today_date)
                 elif payMet[1] == "$":
                     offset = BMonthEnd()
                     payDay = datetime.strptime(today_date, date_format)
-                    d = offset.rollfoward(payDay)
-                    d = datetime.datetime(d, date_format)
+                    d = offset.rollforward(payDay)
                     if payDay.strftime("%d") == d.strftime("%d"):
                         self.payday_employee_method(emp.id, value, today_date)
-                elif datetime.strptime(today_date, date_format).strftime("%d") == payMet[1]:
+                elif str(datetime.strptime(today_date, date_format).strftime("%d")).lower() == payMet[1]:
                     self.payday_employee_method(emp.id, value, today_date)
 
 
@@ -201,18 +200,19 @@ class Company(BankData):
                         
 
 
-### Teste de empregados
+# ### Teste de empregados
 # parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
-# # parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
-# #                             sindMember=False, emp_type="Comissioned", payMethod="AccountCredit", date='2021-4-10', 
-# #                             bankAcc={'bankID':"001", 'agency':"41730-0", 'account':'37501-0'}, wage=23054.4)
+# parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
+#                             sindMember=False, emp_type="Hourly", payMethod="AccountCredit", date='2021-4-10', 
+#                             bankAcc={'bankID':"001", 'agency':"41730-0", 'account':'37501-0'}, wage=23054.4)
 
 # parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
 #                             sindMember=True, payMethod='CheckOnHands',emp_type="Salaried", date='2021-4-1')
 
-# ### Teste função de alterar
+# # ### Teste função de alterar
 # i = parqueShopping.get_employee(969651)
 # emp = parqueShopping.employeesList[i]
+# print(emp.workHours)
 # parqueShopping.change_employee_details(969651, emp_t="Salaried", name="Levizinho", adress="Helena Costa", rg="11111")
 
 ### Teste função de data de pagamento

@@ -1,7 +1,13 @@
 class PayMethod():
-    def __init__(self, value, date):
+    def __init__(self, name, value, date):
+        self.name = name
         self.value = value
         self.date = date
+
+    def get_name(self):
+        return self.name
+    def set_name(self, new_name):
+        self.name = new_name
 
     def get_value(self):
         return self.value
@@ -14,4 +20,4 @@ class PayMethod():
         self.date = new_date
 
     def __repr__(self):
-        return "%.2f, %s" %(self.value, self.date)
+        return "%s: R$ %.2f, %s" %(self.name, self.value, self.date)
