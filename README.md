@@ -24,8 +24,6 @@ percentual das vendas que realizam. Eles submetem resultados de vendas que infor
 
 👉Podem pedir depósito em conta bancária
 
-#### Code Smells
-
 • Alguns empregados pertencem ao sindicato (para simplificar, só há um possível sindicato).
 O sindicato cobra uma taxa mensal do empregado e essa taxa pode variar entre
 empregados. A taxa sindical é deduzida do salário. Além do mais, o sindicato pode
@@ -37,6 +35,7 @@ identificação no sistema de folha de pagamento.
 • A folha de pagamento é rodada todo dia e deve pagar os empregados cujos salários vencem naquele dia. O sistema receberá a data até a qual o pagamento deve ser feito e calculará o pagamento para cada empregado desde a última vez em que este foi pago.
 
 
+#### Code Smells
 
 1. Long Method: 
 	1.1 The size of the parameter list
