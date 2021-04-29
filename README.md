@@ -24,7 +24,7 @@ percentual das vendas que realizam. Eles submetem resultados de vendas que infor
 
 👉Podem pedir depósito em conta bancária
 
-####Code Smells
+#### Code Smells
 
 • Alguns empregados pertencem ao sindicato (para simplificar, só há um possível sindicato).
 O sindicato cobra uma taxa mensal do empregado e essa taxa pode variar entre
