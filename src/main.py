@@ -1,18 +1,19 @@
 from Company.Company import Company
+import json
+import os
 
+datapath = os.path.join("Projeto_de_software_2020.1", "")
+
+f = open('/home/levi/Documentos/p3/Projeto_de_software_2020.1/employees.json')
+data = json.load(f)
 
 parqueShopping = Company("Parque Shopping", "001", "3021-2", "45021-1")
-parqueShopping.add_employee(name="João Levi Gomes de Lima", rg="35913738", adress="R. Alameda Slim", 
-                            sindMember=False, emp_type="Salaried", wage=4523.37, payMethod="DeliveryCheck", date='2021-3-10', 
-                            hour_value=43.44)
 
-parqueShopping.add_employee(name="Pedro Igor Gomes", rg="123456", adress="R. Hotel Jatiuca",
-                            sindMember=True, payMethod='AccountCredit',emp_type="Hourly", 
-                            date='2021-4-1', hour_value=35.27,
-                            bankAcc={'bankID':'002', 'agency':'4510-1', 'account':'23041-2'})
-# print(parqueShopping.employeesList)
+for emp in data:
+    parqueShopping.add_employee(emp['nome'], emp['rg'], emp['endereco'], emp['sindMember'], emp['emp_type'],
+                                emp['payMethod'], emp['date'], emp['wage'], emp['hour_value'],
+                                bankAcc={'bankID':emp['bankID'], 'agency':emp['agency'], 'account':emp['account']})
+print(parqueShopping.employeesList)
+f.close()
 
-parqueShopping.pay_employees("2021-04-30")
-# print(parqueShopping.payment_register)
 
-print(parqueShopping.payment_register)
