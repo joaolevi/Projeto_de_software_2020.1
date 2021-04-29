@@ -47,7 +47,7 @@ class Company(BankData):
                 x+=1
 
     def add_employee(self, name, rg, adress, sindMember, emp_type, payMethod, date, wage=None, hour_value=None, bankAcc=None):
-        new_id = int(rg[:-3])*27
+        new_id = int(str(rg[:6]))*27
         if emp_type == "Comissioned":
             emp = Comissioned(name=name, rg=rg, id=new_id, adress=adress, 
                             paymentMethod = payMethod, sindMember=sindMember, wage=wage, date=date)
