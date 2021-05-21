@@ -60,4 +60,4 @@ class Employee:
         self.last_pay_date = new_date
 
     def __repr__(self):
-        return "%s\n, %s" %(self.name, self.id)
+        return "%s, %s\n" %(self.name, self.id)
