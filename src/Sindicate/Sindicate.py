@@ -22,5 +22,5 @@ class Sindicate:
             if m.sindMember:
                 m.tax_value += self.__taxPerMonth
 
-    def tax_associator(self, emp, taxType):
-        emp.tax_value += self.__serviceTax[taxType]
+    def tax_associator(self, emp, tax_value):
+        emp.tax_value += tax_value

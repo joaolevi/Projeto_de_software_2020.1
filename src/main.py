@@ -18,8 +18,10 @@ for emp in data:
     parqueShopping.add_employee(emp['nome'], emp['rg'], emp['endereco'], emp['sindMember'], emp['emp_type'],
                                 emp['payMethod'], emp['date'], emp['wage'], emp['hour_value'],
                                 bankAcc={'bankID':emp['bankID'], 'agency':emp['agency'], 'account':emp['account']})
-# print(parqueShopping.employeesList)
+print(parqueShopping.employeesList)
 f.close()
+
+sindicato = Sindicate(25.31)
 
 while(1):
     print("Escolha uma opção: ")
@@ -61,8 +63,110 @@ while(1):
                                 emp['payMethod'], emp['date'], emp['wage'], emp['hour_value'],
                                 bankAcc={'bankID':bankID, 'agency':agency, 'account':account})
         print(parqueShopping.employeesList)
+    elif op == 2:
+        id = int(input("Digite o ID do empregado que deseja remover: "))
+        parqueShopping.remove_employee(id)
+        print(parqueShopping.employeesList)
+    elif op==3:
+        id = int(input("ID do empregado: "))
+        date = input("Data do ponto: ")
+        hours = float(input("Horas trabalhadas: "))
+        parqueShopping.timeRegister(id, date, hours)
+    elif op==4:
+        id = int(input("ID do empregado: "))
+        date = input("Data da venda: ")
+        value = float(input("Valor da venda: "))
+        parqueShopping.set_sale_to_employee(id, date, value)
+    elif op==5:
+        id = int(input("ID do empregado: "))
+        tax_value = float(input("Valor da taxa: "))
+        sindicato.tax_associator(id, tax_value)
+    elif op==6:
+        id = int(input("ID do empregado: "))
+        print("Escolha o atributo que deseja alterar: ")
+        while(1):
+            print("1 - Tipo de empregado\n2 - Nome\n3 - RG\n4 - Endereço\n5 - Dados Bancários\n6 - Método de pagamento\n7 - Salário\n\n8 - Alterar\n9 - Sair sem alterar")
+            opcao = int(input())
+            if opcao == 1:
+                print("Tipo de empregado: \n")
+                print("1 - Comissionado\n2 - Horista\n3 - Salariado")
+                escolha = int(input("Digite a opção: "))
+                if escolha == 1:
+                    emp_type = "Comissioned"
+                elif escolha == 2:
+                    emp_type = "Hourly"
+                else:
+                    emp_type = "Salaried"
+            elif opcao == 2:
+                name = input("Nome: ")
+            elif opcao == 3:
+                rg = input("RG: ")
+            elif opcao == 4:
+                adress = input("Endereço: ")
+            elif opcao == 5:
+                bankID = input("Banco: ")
+                agency = input("Agência: ")
+                account = input("Conta: ")
+            elif opcao == 6:
+                print("1 - Crédito em Conta\n2 - Cheque em mãos\n3 - Cheque via correios\n")
+                escolha = int(input("Novo método: "))
+                if escolha == 1:
+                    payMethod = "AccountCredit"
+                elif escolha == 2:
+                    payMethod = "CheckOnHands"
+                else:
+                    payMethod = "DeliveryCheck"
+            elif opcao == 7:
+                new_wage = float(input("Salário: "))
+            elif opcao == 8:
+                parqueShopping.change_employee_details(id, emp_t=emp_type, name=name, rg=rg, adress=adress, bankAcc={'bankID':bankID, 'agency':agency, 'account':account}, payMethod=payMethod, wage=new_wage)
+                print("Dados alterados!\n\n")
+                break
+            elif opcao == 9:
+                break
+    elif op == 7:
+        date = input("Data para rodar a folha de pagamento (AAAA-MM-DD): ")
+        parqueShopping.pay_employees(date)
+    elif op == 8:
+        id = int(input("ID do empregado: "))
+        parqueShopping.set_employee_pay_date(id)
+        print("Data alterada!")
+    elif op == 9:
+        print("Quantas datas deseja criar? ")
+        i = int(input())
+        for c in range(i):
+            schedule = []
+            t = input("1 - weekly-1\n2 - weekly-2\n3 - Monthly\n0 - Sair")
+            if t == 0:
+                break
+            else:
+                if t == 1:
+                    prazo = "weekly-1"
+                elif t == 2:
+                    prazo = "weekly-2"
+                else: prazo = "monthly"
+                if prazo == "monthly":
+                    print("\nSe o dia for o último dia útil do mês escreva 'util'\n")
+                    t = input("Dia: ")
+                    if t == "util":
+                        dia = "$"
+                    else:
+                        dia = t
+                else:
+                    t = input("Dia: ")
+                final = prazo+"-"+dia
+                escolha = input("Adicionar data a agenda? 1 - SIM / 2 - NAO: ")
+                if escolha == 1:
+                    schedule.append(final)
+        if len(schedule) >= 1:
+            parqueShopping.set_new_pay_schedule(schedule)
+            print(parqueShopping.pay_schedule)
+            print("\n")
+    elif op == 10:
+        break
 
-
+            
+            
 
 # #Localiza o empregado
 # i = parqueShopping.get_employee(11786526)
