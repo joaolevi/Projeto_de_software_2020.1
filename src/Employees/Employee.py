@@ -9,7 +9,7 @@ class Employee:
         self.bankAcc = None
         self.paymentMethod = paymentMethod
         self.tax_value = 0
-        self.workHours = 0
+        self.workHours = []
         self.payDate = None
         self.last_pay_date = date
 
@@ -34,7 +34,7 @@ class Employee:
         return self.workHours
     
     def add_workHours(self, timeReg):
-        self.workHours += timeReg
+        self.workHours.append(timeReg)
     
     def clear_workHours(self):
         self.workHours = None

@@ -177,7 +177,7 @@ class Company(BankData):
                     bonus_hours = hours-(worked_days*8)
                     value = emp.hour_value*(hours + 0.5*bonus_hours)
                 if isinstance(emp, Comissioned):
-                    value = emp.wage + emp.comission
+                    value = float(emp.wage) + emp.comission
                 if isinstance(emp, Salaried):
                     value = emp.wage
                 if str(datetime.strptime(today_date, date_format).strftime("%d")).lower() == payMet[1]:
@@ -190,6 +190,8 @@ class Company(BankData):
                         self.payday_employee_method(emp.id, value, today_date)
                 elif str(datetime.strptime(today_date, date_format).strftime("%d")).lower() == payMet[1]:
                     self.payday_employee_method(emp.id, value, today_date)
+        print(self.payment_register)
+        print("\n")
 
 
                         

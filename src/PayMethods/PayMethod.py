@@ -20,4 +20,4 @@ class PayMethod():
         self.date = new_date
 
     def __repr__(self):
-        return "%s: R$ %.2f, %s" %(self.name, self.value, self.date)
+        return "%s: R$ %.2f, %s" %(self.name, float(self.value), self.date)
